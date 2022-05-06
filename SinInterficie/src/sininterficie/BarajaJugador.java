@@ -21,11 +21,7 @@ public class BarajaJugador {
         cartas = b.repartir();
         jugadorHumano = false;
     }
-    
-    public void ponerCarta(int idx){
         
-    }
-    
     @Override
     public String toString(){ // Comprobar metodo
         String s = "";

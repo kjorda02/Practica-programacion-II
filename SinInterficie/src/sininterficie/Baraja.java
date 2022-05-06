@@ -10,15 +10,16 @@ import java.util.Random;
  *
  * @author kjorda
  */
-// Aaaaaaaah
 public class Baraja {
     private Carta[] cartas;
     private int indice;
+    private boolean vacia;
     
     public Baraja(){
         cartas = new Carta[52];
         indice = 0;
         this.reset();
+        vacia = false;
     }
     
     public Baraja(Carta[] car){
@@ -27,6 +28,15 @@ public class Baraja {
         for (int i = 0; i < 52; i++){
             cartas[i] = car[i];
         }
+        vacia = false;
+    }
+    
+    public boolean isVacia(){
+        return vacia;
+    }
+    
+    public boolean isNull(int idx){ // Indica si hay una carta en una posicion concreta de la baraja
+        return (cartas[idx] == null);
     }
     
     public void reset(){

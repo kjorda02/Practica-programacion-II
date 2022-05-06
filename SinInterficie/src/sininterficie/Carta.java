@@ -39,4 +39,45 @@ public class Carta {
         s += numero;
         return s;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Palo getPalo() {
+        return palo;
+    }
+    
+    public int getPos(){ // Donde se deberia colocar la carta en la baraja
+        int pos = 0; 
+        for (int i = 0; i < 4; i++){
+            if (Palo.values()[i] == palo){
+                pos = i*13;
+            }
+        }
+        pos += numero;
+        return pos;
+    }
+    
+    public boolean esPosiblePoner(Baraja b){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
+        if (b.isVacia() && this.numero != 7){
+            return false;
+        }
+        
+        int pos = this.getPos();
+        
+        if (!b.isNull(pos-1)){ // Carta de la izquierda
+            return true;
+        }
+        if (!b.isNull(pos+1)){ // Carta de la derecha
+            return true;
+        }
+        if (!b.isNull(pos-13)){ // Carta de arriba
+            return true;
+        }
+        if (!b.isNull(pos+13)){ // Carta de abajo
+            return true;
+        }
+        return false;
+    }
 }

@@ -10,6 +10,9 @@ import java.util.Random;
  *
  * @author kjorda
  */
+// Esta clase no representa el conjunto de cartas sino la mesa donde se colocan las cartas.
+// Por lo tanto, la baraja podra tener posiciones sin cartas (null)
+
 public class Baraja {
     private Carta[] cartas;
     private int indice;
@@ -43,6 +46,10 @@ public class Baraja {
         for (int i = 0; i < 52; i++){
             cartas[i] = new Carta((i%13)+1, Palo.values()[i/13]);
         }
+    }
+    
+    public void ponerCarta(Carta c){
+        cartas[c.getPos()] = c;
     }
     
     public void mezclar(){

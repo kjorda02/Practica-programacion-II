@@ -21,7 +21,16 @@ public class BarajaJugador {
         cartas = b.repartir();
         jugadorHumano = false;
     }
-        
+    
+    public boolean ponerCarta(int idx, Baraja b){
+        if (cartas[idx].esPosiblePoner(b)){
+            b.ponerCarta(cartas[idx]);
+            cartas[idx] = null;
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public String toString(){ // Comprobar metodo
         String s = "";

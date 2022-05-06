@@ -10,6 +10,7 @@ import java.util.Random;
  *
  * @author kjorda
  */
+// Aaaaaaaah
 public class Baraja {
     private Carta[] cartas;
     private int indice;

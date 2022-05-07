@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sininterficie;
+package Practica;
 
 /**
  *
@@ -17,29 +17,6 @@ public class Carta {
         numero = num;
         palo = pal;
         posicion = this.getPos();
-    }
-    
-    @Override
-    public String toString(){
-        String s = "";
-        switch(palo){
-            case TREBOLES:
-                s += "TREBOLES";
-                break;
-            case PICAS:
-                s += "PICAS";
-                break;
-            case CORAZONES:
-                s += "CORAZONES";
-                break;
-            case DIAMANTES:
-                s += "DIAMANTES";
-                break;
-        }
-        
-        s += ", ";
-        s += numero;
-        return s;
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
@@ -83,5 +60,28 @@ public class Carta {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public String toString(){
+        String s = "";
+        switch(palo){
+            case TREBOLES:
+                s += "TREBOLES";
+                break;
+            case PICAS:
+                s += "PICAS";
+                break;
+            case CORAZONES:
+                s += "CORAZONES";
+                break;
+            case DIAMANTES:
+                s += "DIAMANTES";
+                break;
+        }
+        
+        s += ", ";
+        s += numero;
+        return s;
     }
 }

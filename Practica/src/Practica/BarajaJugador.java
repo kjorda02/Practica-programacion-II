@@ -9,17 +9,17 @@ package Practica;
  * @author kjorda
  */
 public class BarajaJugador {
-    private final boolean jugadorHumano;
+    //private final boolean jugadorHumano;
     private Carta[] cartas;
     
     public BarajaJugador(Baraja b, boolean jug){
         cartas = b.repartir();
-        jugadorHumano = jug;
+        //jugadorHumano = jug;
     }
     
     public BarajaJugador(Baraja b){
         cartas = b.repartir();
-        jugadorHumano = false;
+        //jugadorHumano = false;
     }
     
     public boolean ponerCarta(int idx, Baraja b){

@@ -10,13 +10,17 @@ import java.util.Random;
  *
  * @author kjorda
  */
-public class SinInterficie {
+public class Practica {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        (new SinInterficie()).prueba();
+        (new Practica()).prueba2();
+    }
+    
+    private void prueba2(){
+        GUIFrame pr = new GUIFrame();
     }
     
     private void prueba(){

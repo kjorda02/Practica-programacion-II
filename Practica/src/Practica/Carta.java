@@ -9,6 +9,9 @@ package Practica;
  * @author kjorda
  */
 public class Carta {
+	//Pruebaaqaaa---sa
+	//asaffsanhibiaAAAA
+    private final int pruebaaaaa;
     private final int numero;
     private final Palo palo;
     private final int posicion;

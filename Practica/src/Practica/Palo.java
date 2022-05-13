@@ -14,4 +14,5 @@ enum Palo{
         CORAZONES,
         PICAS
         PRUEBA
+        PALONUEVODEPRUEBA2
     }

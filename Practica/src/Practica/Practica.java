@@ -16,7 +16,7 @@ public class Practica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        (new Practica()).prueba2();
+        (new Practica()).prueba();
     }
     
     private void prueba2(){

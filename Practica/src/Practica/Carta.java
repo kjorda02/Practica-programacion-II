@@ -12,11 +12,27 @@ public class Carta {
     private final int numero;
     private final Palo palo;
     private final int posicion;
+    private String pathImagen;
     
     public Carta(int num, Palo pal){
         numero = num;
         palo = pal;
         posicion = this.getPos();
+        pathImagen = numero+"_of_";
+        switch(palo){
+            case TREBOLES:
+                pathImagen += "clubs.png";
+                break;
+            case PICAS:
+                pathImagen += "spades.png";
+                break;
+            case CORAZONES:
+                pathImagen += "hearts.png";
+                break;
+            case DIAMANTES:
+                pathImagen += "diamonds.png";
+                break;
+        }
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
@@ -82,6 +98,7 @@ public class Carta {
         
         s += ", ";
         s += numero;
+        s += "     path="+pathImagen;
         return s;
     }
 }

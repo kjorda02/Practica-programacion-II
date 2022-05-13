@@ -13,4 +13,6 @@ enum Palo{
         DIAMANTES,
         CORAZONES,
         PICAS
+        PRUEBA
+        PALONUEVODEPRUEBA2
     }

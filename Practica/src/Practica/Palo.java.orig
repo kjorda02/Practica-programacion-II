@@ -13,6 +13,9 @@ enum Palo{
         DIAMANTES,
         CORAZONES,
         PICAS
+<<<<<<< HEAD
+=======
         PRUEBA
         PALONUEVODEPRUEBA2
+>>>>>>> 860a57bb4b851c722dd0751f5e0bb429a1824d11
     }

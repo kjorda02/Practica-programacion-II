@@ -16,11 +16,11 @@ public class Practica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        (new Practica()).prueba();
+        (new Practica()).prueba2();
     }
     
     private void prueba2(){
-        GUIFrame pr = new GUIFrame();
+        ventana pr = new ventana();
     }
     
     private void prueba(){

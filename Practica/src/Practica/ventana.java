@@ -4,6 +4,8 @@
  */
 package Practica;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -12,9 +14,11 @@ import javax.swing.JFrame;
  *
  * @author kjorda
  */
-public class GUIFrame extends JFrame{
-    GUIFrame(){
+public class ventana extends JFrame{
+    ventana(){
+        Container panelContenidos = getContentPane();
         this.setTitle("MI PRIMERA VENTANA");
+        panelContenidos.setBackground(new Color(00, 102,00)); //006600
         //DECLARACIÓN OBJETO Dimension PARA OBTENER LA DIMENSIÓN DE LA PANTALLA
         //EN LA QUE ESTEMOS EJECUTANDO
         Dimension dimension=Toolkit.getDefaultToolkit().getScreenSize();
@@ -24,12 +28,13 @@ public class GUIFrame extends JFrame{
         int dimensionY=(int) dimension.getHeight();
         //DIMENSIONAR EL CONTENEDOR JFrame ventana CON LA MITAD DE LA RESOLUCIÓN
         //DE LA PANTALLA
-        this.setSize(dimensionX/2, dimensionY/2);  
+        this.setSize(dimensionX/2, (2*dimensionY)/3);  
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //CENTRADO DEL CONTENEDOR ventana EN EL CENTRO DE LA PANTALLA
         this.setLocationRelativeTo(null);
         //VISUALIZACIÓN CONTENEDOR JFrame ventana
+        
         this.setVisible(true);
     }
 }

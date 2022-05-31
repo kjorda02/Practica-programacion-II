@@ -20,7 +20,7 @@ public class Practica {
     }
     
     private void prueba2(){
-        ventana pr = new ventana();
+        Ventana pr = new Ventana();
     }
     
     private void prueba(){

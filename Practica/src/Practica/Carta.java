@@ -4,6 +4,9 @@
  */
 package Practica;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author kjorda
@@ -12,13 +15,14 @@ public class Carta {
     private final int numero;
     private final Palo palo;
     private final int posicion;
-    private String pathImagen;
+    JLabel imagen;
+    //private String pathImagen;
     
     public Carta(int num, Palo pal){
         numero = num;
         palo = pal;
         posicion = this.getPos();
-        pathImagen = numero+"_of_";
+        String pathImagen = numero+"_of_";
         switch(palo){
             case TREBOLES:
                 pathImagen += "clubs.png";
@@ -33,6 +37,7 @@ public class Carta {
                 pathImagen += "diamonds.png";
                 break;
         }
+        imagen = new JLabel(new ImageIcon(pathImagen));
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
@@ -44,6 +49,10 @@ public class Carta {
         }
         pos += numero;
         return pos;
+    }
+    
+    public JLabel getImagen(){
+        return imagen;
     }
     
     public int getNumero() {
@@ -95,10 +104,6 @@ public class Carta {
                 s += "DIAMANTES";
                 break;
         }
-        
-        s += ", ";
-        s += numero;
-        s += "     path="+pathImagen;
         return s;
     }
 }

@@ -11,8 +11,8 @@ import javax.swing.JPanel;
  *
  * @author kjorda
  */
-public class PanelMesa extends JPanel{
-    public PanelMesa(){
+public class Mesa extends JPanel{
+    public Mesa(){
         setLayout(new GridLayout(13,4));
         
     }

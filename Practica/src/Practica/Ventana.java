@@ -14,8 +14,8 @@ import javax.swing.JFrame;
  *
  * @author kjorda
  */
-public class ventana extends JFrame{
-    ventana(){
+public class Ventana extends JFrame{
+    Ventana(){
         Container panelContenidos = getContentPane();
         this.setTitle("MI PRIMERA VENTANA");
         panelContenidos.setBackground(new Color(00, 102,00)); //006600

@@ -12,19 +12,19 @@ public class BarajaJugador {
     //private final boolean jugadorHumano;
     private Carta[] cartas;
     
-    public BarajaJugador(Baraja b, boolean jug){
-        cartas = b.repartir();
+    public BarajaJugador(Mesa m, boolean jug){
+        cartas = m.repartir();
         //jugadorHumano = jug;
     }
     
-    public BarajaJugador(Baraja b){
-        cartas = b.repartir();
+    public BarajaJugador(Mesa m){
+        cartas = m.repartir();
         //jugadorHumano = false;
     }
     
-    public boolean ponerCarta(int idx, Baraja b){
-        if (cartas[idx].esPosiblePoner(b)){
-            b.ponerCarta(cartas[idx]);
+    public boolean ponerCarta(int idx, Mesa m){
+        if (cartas[idx].esPosiblePoner(m)){
+            m.ponerCarta(cartas[idx]);
             cartas[idx] = null;
             return true;
         }

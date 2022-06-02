@@ -4,7 +4,10 @@
  */
 package Practica;
 
+import java.awt.Dimension;
+import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -15,14 +18,14 @@ public class Carta {
     private final int numero;
     private final Palo palo;
     private final int posicion;
-    JLabel imagen;
+    ImageIcon imagen;
     //private String pathImagen;
     
     public Carta(int num, Palo pal){
         numero = num;
         palo = pal;
         posicion = this.getPos();
-        String pathImagen = numero+"_of_";
+        String pathImagen = "imagenes/"+numero+"_of_";
         switch(palo){
             case TREBOLES:
                 pathImagen += "clubs.png";
@@ -37,7 +40,9 @@ public class Carta {
                 pathImagen += "diamonds.png";
                 break;
         }
-        imagen = new JLabel(new ImageIcon(pathImagen));
+        
+        imagen = new ImageIcon(new ImageIcon(pathImagen).getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
@@ -51,7 +56,7 @@ public class Carta {
         return pos;
     }
     
-    public JLabel getImagen(){
+    public ImageIcon getImagen(){
         return imagen;
     }
     
@@ -67,21 +72,21 @@ public class Carta {
         return posicion;
     }
     
-    public boolean esPosiblePoner(Baraja b){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
-        if (b.isVacia() && this.numero != 7){
+    public boolean esPosiblePoner(Mesa m){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
+        if (m.isVacia() && this.numero != 7){ // Si la baraja esta vacia solo se puede colocar un 7
             return false;
         }
         
-        if (!b.isNull(posicion-1)){ // Carta de la izquierda
+        if (!m.isNull(posicion-1)){ // Carta de la izquierda
             return true;
         }
-        if (!b.isNull(posicion+1)){ // Carta de la derecha
+        if (!m.isNull(posicion+1)){ // Carta de la derecha
             return true;
         }
-        if (!b.isNull(posicion-13)){ // Carta de arriba
+        if (!m.isNull(posicion-13)){ // Carta de arriba
             return true;
         }
-        if (!b.isNull(posicion+13)){ // Carta de abajo
+        if (!m.isNull(posicion+13)){ // Carta de abajo
             return true;
         }
         return false;

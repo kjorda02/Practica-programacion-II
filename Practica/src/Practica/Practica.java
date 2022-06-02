@@ -4,7 +4,11 @@
  */
 package Practica;
 
+import java.awt.BorderLayout;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,6 +25,12 @@ public class Practica {
     
     private void prueba2(){
         Ventana pr = new Ventana();
+        Mesa m = new Mesa(new Baraja());
+        m.setBounds(10,100,930,400);
+        
+        pr.panelContenidos().add(m, BorderLayout.CENTER);
+        pr.revalidate();
+        pr.repaint();
     }
     
     private void prueba(){
@@ -34,12 +44,11 @@ public class Practica {
             prueba[i] = new Carta(i%13, pal);
         }
         
-        Baraja bar = new Baraja(prueba);
-        bar.reset();
+        Baraja bar = new Baraja();
         System.out.println(bar.toString());
         System.out.println("---------------");
         for (int i = 0; i < 4; i++){
-            System.out.println((new BarajaJugador(bar)).toString());
+            //System.out.println((new BarajaJugador(bar)).toString());
         }
     }
     

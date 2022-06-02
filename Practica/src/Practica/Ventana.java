@@ -4,37 +4,40 @@
  */
 package Practica;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author kjorda
  */
 public class Ventana extends JFrame{
+    Container panelContenidos;
+    
     Ventana(){
-        Container panelContenidos = getContentPane();
-        this.setTitle("MI PRIMERA VENTANA");
+        panelContenidos = getContentPane();
+        setLayout(null);
+        this.setTitle("Practica programacion II");
         panelContenidos.setBackground(new Color(00, 102,00)); //006600
-        //DECLARACIÓN OBJETO Dimension PARA OBTENER LA DIMENSIÓN DE LA PANTALLA
-        //EN LA QUE ESTEMOS EJECUTANDO
-        Dimension dimension=Toolkit.getDefaultToolkit().getScreenSize();
-        //DECLARACIÓN VARIABLES ENTERAS Y ASIGNACIÓN EN ELLAS DE LA RESOLUCIÓN
-        //HORIZONTAL Y VERTICAL DE LA PANTALLA
-        int dimensionX=(int) dimension.getWidth();
-        int dimensionY=(int) dimension.getHeight();
-        //DIMENSIONAR EL CONTENEDOR JFrame ventana CON LA MITAD DE LA RESOLUCIÓN
-        //DE LA PANTALLA
-        this.setSize(dimensionX/2, (2*dimensionY)/3);  
+
+        this.setSize(960,720);
+        this.setResizable(false);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //CENTRADO DEL CONTENEDOR ventana EN EL CENTRO DE LA PANTALLA
         this.setLocationRelativeTo(null);
         //VISUALIZACIÓN CONTENEDOR JFrame ventana
-        
         this.setVisible(true);
+    }
+    
+    public Container panelContenidos(){
+        return panelContenidos;
     }
 }

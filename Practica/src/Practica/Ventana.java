@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 public class Ventana extends JFrame{
     Container panelContenidos;
     TaulaJoc mesa;
+    BarajaJugador[] barajas;
     
     Ventana(){
         panelContenidos = getContentPane();
@@ -34,12 +35,22 @@ public class Ventana extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //CENTRADO DEL CONTENEDOR ventana EN EL CENTRO DE LA PANTALLA
         this.setLocationRelativeTo(null);
+        ////////////////////////////////////////////////////////////////////////
         
         
-        mesa = new TaulaJoc(new Baraja());
-        PanelInferior panelInf = new PanelInferior(mesa);
         
-        panelContenidos.add(mesa, BorderLayout.CENTER);
+        mesa = new TaulaJoc(new Baraja()); // Creamos una nueva mesa
+        barajas = new BarajaJugador[4];
+        for (int i=0; i < 4; i++){
+            barajas[i] = new BarajaJugador(mesa);
+        }
+        
+        mesa.actualizar();
+        
+        PanelInferior panelInf = new PanelInferior(mesa); // El panel que tendra los botones y el texto informativo
+        PanelCentral panelCtr = new PanelCentral(mesa, barajas);
+        
+        panelContenidos.add(panelCtr, BorderLayout.CENTER);
         panelContenidos.add(panelInf, BorderLayout.SOUTH);
 
         

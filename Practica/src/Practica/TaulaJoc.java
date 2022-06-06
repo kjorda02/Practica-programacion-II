@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -24,17 +25,19 @@ public class TaulaJoc extends JPanel{
         
         for (int i = 0; i < 52; i++){
             cartas[i] = b.getCarta(i);
-            JButton boton = new JButton(cartas[i].getImagen());
-            boton.setOpaque(false);
-            boton.setContentAreaFilled(false);
-            boton.setBorderPainted(false);
-            add(boton);
+            JLabel carta = new JLabel(cartas[i].getImagen());
+            add(carta);
         }
         setBackground(new Color(00, 102,00));
     }
     
     public boolean isVacia(){
         return false;
+    }
+    
+    public void actualizar(){
+        revalidate();
+        repaint();
     }
     
     public boolean isNull(int idx){ // Indica si hay una carta en una posicion concreta de la baraja

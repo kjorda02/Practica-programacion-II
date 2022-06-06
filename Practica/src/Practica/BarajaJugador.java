@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  *
  * @author kjorda
  */
-public class BarajaJugador extends JPanel{
+public class BarajaJugador {
     //private final boolean jugadorHumano;
     private Carta[] cartas;
     
@@ -22,6 +22,10 @@ public class BarajaJugador extends JPanel{
     public BarajaJugador(TaulaJoc m){
         cartas = m.repartir();
         //jugadorHumano = false;
+    }
+    
+    public Carta getCarta(int pos){
+        return cartas[pos];
     }
     
     public boolean ponerCarta(int idx, TaulaJoc m){

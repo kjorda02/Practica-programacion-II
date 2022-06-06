@@ -25,12 +25,8 @@ public class Practica {
     
     private void prueba2(){
         Ventana pr = new Ventana();
-        Mesa m = new Mesa(new Baraja());
-        m.setBounds(10,100,930,400);
-        
-        pr.panelContenidos().add(m, BorderLayout.CENTER);
-        pr.revalidate();
-        pr.repaint();
+        //pr.revalidate();
+        //  pr.repaint();
     }
     
     private void prueba(){

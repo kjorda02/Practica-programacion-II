@@ -4,25 +4,27 @@
  */
 package Practica;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author kjorda
  */
-public class BarajaJugador {
+public class BarajaJugador extends JPanel{
     //private final boolean jugadorHumano;
     private Carta[] cartas;
     
-    public BarajaJugador(Mesa m, boolean jug){
+    public BarajaJugador(TaulaJoc m, boolean jug){
         cartas = m.repartir();
         //jugadorHumano = jug;
     }
     
-    public BarajaJugador(Mesa m){
+    public BarajaJugador(TaulaJoc m){
         cartas = m.repartir();
         //jugadorHumano = false;
     }
     
-    public boolean ponerCarta(int idx, Mesa m){
+    public boolean ponerCarta(int idx, TaulaJoc m){
         if (cartas[idx].esPosiblePoner(m)){
             m.ponerCarta(cartas[idx]);
             cartas[idx] = null;

@@ -72,7 +72,7 @@ public class Carta {
         return posicion;
     }
     
-    public boolean esPosiblePoner(Mesa m){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
+    public boolean esPosiblePoner(TaulaJoc m){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
         if (m.isVacia() && this.numero != 7){ // Si la baraja esta vacia solo se puede colocar un 7
             return false;
         }

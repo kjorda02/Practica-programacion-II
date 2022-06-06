@@ -28,7 +28,7 @@ public class Jugador {
         humano = false;
     }
     
-    public void repartir(Mesa m){
+    public void repartir(TaulaJoc m){
         baraja = new BarajaJugador(m);
     }
 }

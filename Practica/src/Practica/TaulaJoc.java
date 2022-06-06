@@ -14,11 +14,11 @@ import javax.swing.JPanel;
  *
  * @author kjorda
  */
-public class Mesa extends JPanel{
+public class TaulaJoc extends JPanel{
     private Carta[] cartas;
     private int indice; // Indica que cartas han sido repartidas    
     
-    public Mesa(Baraja b){
+    public TaulaJoc(Baraja b){ // Constructor - crea todos los subpaneles etc
         setLayout(new GridLayout(4,13));
         cartas = new Carta[52];
         

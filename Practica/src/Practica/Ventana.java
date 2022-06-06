@@ -20,12 +20,13 @@ import javax.swing.JPanel;
  */
 public class Ventana extends JFrame{
     Container panelContenidos;
+    TaulaJoc mesa;
     
     Ventana(){
         panelContenidos = getContentPane();
-        setLayout(null);
+        setLayout(new BorderLayout());
         this.setTitle("Practica programacion II");
-        panelContenidos.setBackground(new Color(00, 102,00)); //006600
+        panelContenidos.setBackground(new Color(00, 102,00)); //#006600
 
         this.setSize(960,720);
         this.setResizable(false);
@@ -33,11 +34,16 @@ public class Ventana extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //CENTRADO DEL CONTENEDOR ventana EN EL CENTRO DE LA PANTALLA
         this.setLocationRelativeTo(null);
+        
+        
+        mesa = new TaulaJoc(new Baraja());
+        PanelInferior panelInf = new PanelInferior(mesa);
+        
+        panelContenidos.add(mesa, BorderLayout.CENTER);
+        panelContenidos.add(panelInf, BorderLayout.SOUTH);
+
+        
         //VISUALIZACIÓN CONTENEDOR JFrame ventana
         this.setVisible(true);
-    }
-    
-    public Container panelContenidos(){
-        return panelContenidos;
     }
 }

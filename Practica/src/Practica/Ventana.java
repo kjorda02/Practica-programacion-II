@@ -37,7 +37,7 @@ public class Ventana extends JFrame{
         ////////////////////////////////////////////////////////////////////////
         
         
-        mesa = new TaulaJoc(new Baraja()); // Creamos una nueva mesa
+        mesa = new TaulaJoc(); // Creamos una nueva mesa
         barajas = new BarajaJugador[4];
         for (int i=0; i < 4; i++){ // Repartimos las cartas de la mesa a 4 objetos barajaJugador
            // barajas[i] = new BarajaJugador(mesa);
@@ -45,8 +45,8 @@ public class Ventana extends JFrame{
         
         mesa.actualizar();
         
-        PanelInferior panelInf = new PanelInferior(mesa); // El panel que tendra los botones y el texto informativo
         PanelPrincipal panelCtr = new PanelPrincipal(mesa);
+        PanelInferior panelInf = new PanelInferior(panelCtr); // El panel que tendra los botones y el texto informativo
         
         panelContenidos.add(panelCtr, BorderLayout.CENTER);
         panelContenidos.add(panelInf, BorderLayout.SOUTH);
@@ -54,6 +54,7 @@ public class Ventana extends JFrame{
         
         //VISUALIZACIÓN CONTENEDOR JFrame ventana
         this.pack();
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 }

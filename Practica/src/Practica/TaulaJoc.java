@@ -21,16 +21,14 @@ public class TaulaJoc extends JPanel{
     private Carta[] cartas;
     private int indice; // Indica que cartas han sido repartidas   
     private JPanel[] rejilla; // Paneles que componen la "mesa"
+    Baraja b = new Baraja();
     
-    public TaulaJoc(Baraja b){ // Constructor - crea todos los subpaneles etc
+    public TaulaJoc(){ // Constructor - crea todos los subpaneles etc
         setBackground(new Color(00, 102,00));
         setLayout(new GridLayout(4,13));
         cartas = new Carta[52];
         rejilla = new JPanel[52];
         
-        for (int i = 0; i < 52; i++){ // Copiamos las cartas de la baraja al array de las cartas que tiene la mesa
-            cartas[i] = b.getCarta(i);
-        }
         
         for (int i=0; i<52;i++){ // Creamos los paneles que constityen la rejilla de la mesa (estos paneles contendran las cartas)
             JPanel p = new JPanel();
@@ -40,21 +38,37 @@ public class TaulaJoc extends JPanel{
             rejilla[i] = p;
         }
         
-        
-        for (int i = 0; i < 52; i++){ // Añadimos las cartas a los paneles creados previamente (no deberia haber ninguna aun)
-            JLabel carta = new JLabel(cartas[i].getImagen());
-            rejilla[i].removeAll();
-            rejilla[i].add(carta);
-        }
+        reiniciar();
         
         for (int i=0; i < 52; i++){ // Añadimos todos los paneles de la rejilla creados previamente al panel principal  
             add(rejilla[i]);
         }
-        
     }
     
     public boolean isVacia(){
         return false;
+    }
+    
+    public void reiniciar(){
+        for (int i = 0; i < 52; i++){ // Copiamos las cartas de la baraja al array de las cartas que tiene la mesa
+            cartas[i] = b.getCarta(i);
+            //System.out.println(String.valueOf(b.getCarta(i).getNumero()));
+        }
+        
+        actualizar();
+    }
+    
+    public void mezclar(){
+        Random r = new Random();
+        for (int i = 51; i > 0; i--){ // Algoritmo Fisher-Yates
+            int rand = r.nextInt(i+1); // i+i ya que nextInt es exclusivo con el limite especificado
+            
+            // Intercambiar cartas[i] y cartas[rand]
+            Carta tmp = cartas[i];
+            cartas[i] = cartas[rand];
+            cartas[rand] = tmp;
+        }
+        actualizar();
     }
     
     public void actualizar(){
@@ -79,18 +93,7 @@ public class TaulaJoc extends JPanel{
     public void ponerCarta(Carta c){
         cartas[c.getPos()] = c;
     }
-    
-    public void mezclar(){
-        Random r = new Random();
-        for (int i = 51; i > 0; i--){ // Algoritmo Fisher-Yates
-            int rand = r.nextInt(i+1); // i+i ya que nextInt es exclusivo con el limite especificado
-            
-            // Intercambiar cartas[i] y cartas[rand]
-            Carta tmp = cartas[i];
-            cartas[i] = cartas[rand];
-            cartas[rand] = tmp;
-        }
-    }
+       
     
     public Carta[] repartir(){ // Devuelve un array de cartas repartidas y las quita de la Mesa
         if (indice > 3){ // Si indice = 4 no quedan cartas para repartir

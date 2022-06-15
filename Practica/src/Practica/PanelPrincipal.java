@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 // Este es el panel principal, que contiene los paneles de las cartas en la mesa, el de las cartas del jugador, y el del numero de cartas de los jugadores artificiales
 public class PanelPrincipal extends JPanel implements ActionListener{
     JPanel panelSuperior, panelInferior;
-    TaulaJoc panelCentral;
+    TaulaJoc mesa;
     
     int numCartasHumano = 0, numCartasCPU1 = 0, numCartasCPU2 = 0, numCartasCPU3 = 0;
     BarajaJugador[] barajas;
@@ -33,9 +33,9 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     
     public PanelPrincipal(TaulaJoc m){
         ////////////////    TAULAJOC - PANEL CENTRAL////////////////////////////
-        panelCentral = m;
+        mesa = m;
         setLayout(new BorderLayout());
-        add(panelCentral, BorderLayout.CENTER);
+        add(mesa, BorderLayout.CENTER);
         
         ///////////////////     PANEL INFERIOR    //////////////////////////////
         panelInferior = new JPanel(new BorderLayout()); // Creamos el panel que mostrara la baraja y la puntuación del jugador
@@ -77,9 +77,17 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         for (int i = 0; i < 13; i++){
             ArrayCasillas[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
         }
-        
         revalidate();
         repaint();
+    }
+    
+    
+    public void mezclar(){
+        mesa.mezclar();
+    }
+    
+    public void reiniciar(){
+        mesa.reiniciar();
     }
     
     public void actIndicadorCartasHumano(){

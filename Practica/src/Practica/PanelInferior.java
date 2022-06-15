@@ -21,10 +21,10 @@ public class PanelInferior extends JPanel implements ActionListener {
     JPanel panelBotones;
     JTextArea texto;
     JButton mezclar, jugar, reiniciar;
-    TaulaJoc mesa;
+    PanelPrincipal panelPrincipal;
     
-    public PanelInferior(TaulaJoc m){
-        mesa = m;
+    public PanelInferior(PanelPrincipal p){
+        panelPrincipal = p;
         this.setLayout(new BorderLayout());
         
         // Panel botones (crea el del principio de la partida)
@@ -54,7 +54,13 @@ public class PanelInferior extends JPanel implements ActionListener {
             case "Mezclar":
                 jugar.setEnabled(true);
                 reiniciar.setEnabled(true);
-                mesa.mezclar();
+                panelPrincipal.mezclar();
+                break;
+            case "Reiniciar":
+                jugar.setEnabled(false);
+                reiniciar.setEnabled(false);
+                panelPrincipal.reiniciar();
+                break;
         }
     }
 }

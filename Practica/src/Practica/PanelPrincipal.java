@@ -10,9 +10,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -29,7 +31,9 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     BarajaJugador[] barajas;
     
     JLabel indicadorCartasHumano;
+    JLabel[] etiquetasNumCartasCPU;
     JPanel[] arrayCasillasJugador = new JPanel[13]; // Estos JPanels formaran las casillas donde se podran colocar las cartas del jugador
+    ImageIcon dorsoCarta = new ImageIcon(new ImageIcon("imagenes/card_back_blue.png").getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
     
     public PanelPrincipal(TaulaJoc m){
         ////////////////    TAULAJOC - PANEL CENTRAL////////////////////////////
@@ -71,6 +75,33 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         
         add(panelInferior, BorderLayout.SOUTH);
         
+        /////////////// PANEL SUPERIOR - CARTAS JUGADORES CPU //////////////////
+        panelSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER,150,0));
+        panelSuperior.setBackground(new Color(00, 102,00));
+        
+        JPanel[] casillasNumCartasCPU = new JPanel [3];
+        for (int i = 0; i < 3; i++){
+            casillasNumCartasCPU[i] = new JPanel();
+            casillasNumCartasCPU[i].setBackground(new Color(00,82,00));
+            casillasNumCartasCPU[i].setPreferredSize(new Dimension(76,106));
+            casillasNumCartasCPU[i].setBorder(BorderFactory.createLineBorder(new Color(00, 102,00),3));
+            panelSuperior.add(casillasNumCartasCPU[i]);
+        }
+        
+        etiquetasNumCartasCPU = new JLabel[3];
+        for (int i = 0; i < 3; i++){
+            etiquetasNumCartasCPU[i] = new JLabel("0");
+            etiquetasNumCartasCPU[i].setFont(new Font("", Font.BOLD, 40));
+            etiquetasNumCartasCPU[i].setForeground(Color.WHITE);
+            etiquetasNumCartasCPU[i].setHorizontalAlignment(JLabel.CENTER);
+            etiquetasNumCartasCPU[i].setPreferredSize(new Dimension(60,90));
+            etiquetasNumCartasCPU[i].setHorizontalTextPosition(JLabel.CENTER);
+            etiquetasNumCartasCPU[i].setVerticalTextPosition(JLabel.CENTER);
+            //etiquetasNumCartasCPU[i].setOpaque(true);
+            casillasNumCartasCPU[i].add(etiquetasNumCartasCPU[i]);
+        }
+        
+        add(panelSuperior, BorderLayout.NORTH);
     }
     
     public void mezclar(){
@@ -84,7 +115,7 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         
         }
         numCartasHumano = 0;
-        actIndicadorCartasHumano();
+        actIndicadoresCartas();
         
         revalidate();
         repaint();
@@ -100,14 +131,34 @@ public class PanelPrincipal extends JPanel implements ActionListener{
             arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen())); // Bug al jugar por 2a vez
         }
         numCartasHumano = 13;
-        actIndicadorCartasHumano();
+        numCartasCPU1 = 13;
+        numCartasCPU2 = 13;
+        numCartasCPU3 = 13;
+        actIndicadoresCartas();
         
         revalidate();
         repaint();
     }
     
-    public void actIndicadorCartasHumano(){
+    public void actIndicadoresCartas(){
         indicadorCartasHumano.setText(String.valueOf(numCartasHumano));
+        
+        if (numCartasCPU1 > 0){
+            etiquetasNumCartasCPU[0].setIcon(dorsoCarta);
+        }
+        
+        if (numCartasCPU2 > 0){
+            etiquetasNumCartasCPU[1].setIcon(dorsoCarta);
+        }
+        
+        if (numCartasCPU3 > 0){
+            etiquetasNumCartasCPU[2].setIcon(dorsoCarta);
+        }
+        
+        etiquetasNumCartasCPU[0].setText(String.valueOf(numCartasCPU1));
+        etiquetasNumCartasCPU[1].setText(String.valueOf(numCartasCPU2));
+        etiquetasNumCartasCPU[2].setText(String.valueOf(numCartasCPU3));
+        
         revalidate();
         repaint();
     }

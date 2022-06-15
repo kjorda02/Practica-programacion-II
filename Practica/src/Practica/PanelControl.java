@@ -6,6 +6,7 @@ package Practica;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ public class PanelControl extends JPanel implements ActionListener {
         panelPrincipal.setPanelControl(this);
         this.setLayout(new BorderLayout());
         
-        // Panel botones (crea el del principio de la partida)
+        // --- Panel botones (crea el del principio de la partida) ---
         panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER));
         
@@ -48,6 +49,12 @@ public class PanelControl extends JPanel implements ActionListener {
         reiniciar.setEnabled(false);
         panelBotones.add(reiniciar);
         add(panelBotones, BorderLayout.CENTER);
+        
+        // --- Area texto informativo ---
+        texto = new JTextArea("Antes de jugar hay que mezclar la baraja");
+        //texto.setFont(new Font("", Font.PLAIN, 15));
+        texto.setEditable(false);
+        add(texto, BorderLayout.SOUTH);
     }
     
     @Override
@@ -56,6 +63,7 @@ public class PanelControl extends JPanel implements ActionListener {
             case "Mezclar":
                 jugar.setEnabled(true);
                 reiniciar.setEnabled(true);
+                texto.setText("La baraja esta mezclada");
                 panelPrincipal.mezclar();
                 break;
             case "Reiniciar":
@@ -66,15 +74,18 @@ public class PanelControl extends JPanel implements ActionListener {
                 reiniciar.setEnabled(false);
                 mezclar.setEnabled(true);
                 panelPrincipal.reiniciar();
+                texto.setText("Antes de jugar hay que mezclar la baraja");
                 break;
             case "Jugar":
                 turnoHumano();
+                texto.setText("Las cartas esta repartidas. Te toca. Empieza con un 7 si lo tienes");
                 panelPrincipal.repartir();
                 break;
-            case "Passa":
+            case "Pasar turno":
                 turnoMaquina();
+                texto.setText("Has pasado tu turno");
                 break;
-            case "Torn Jugador":
+            case "Turno Jugador":
                 panelPrincipal.jugarCPU(estadoPartida.ordinal() - 2);
                 switch(estadoPartida){
                     case TURNOCPU0:
@@ -95,7 +106,7 @@ public class PanelControl extends JPanel implements ActionListener {
         estadoPartida = Estado.TURNOHUMANO;
         panelBotones.removeAll();
         
-        passa = new JButton("Passa");
+        passa = new JButton("Pasar turno");
         passa.addActionListener(this);
         panelBotones.add(passa);
         panelBotones.add(reiniciar);
@@ -108,7 +119,7 @@ public class PanelControl extends JPanel implements ActionListener {
         estadoPartida = Estado.TURNOCPU0;
         panelBotones.removeAll();
         
-        tornJugador = new JButton("Torn Jugador");
+        tornJugador = new JButton("Turno Jugador");
         tornJugador.addActionListener(this);
         panelBotones.add(tornJugador);
         panelBotones.add(reiniciar);
@@ -130,5 +141,9 @@ public class PanelControl extends JPanel implements ActionListener {
     
     public Estado getEstado(){
         return estadoPartida;
+    }
+    
+    public void setTexto(String s){
+        texto.setText(s);
     }
 }

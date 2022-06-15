@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
@@ -35,7 +36,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
     JLabel indicadorCartasHumano;
     JLabel[] etiquetasNumCartasCPU;
     JPanel[] arrayCasillasJugador = new JPanel[13]; // Estos JPanels formaran las casillas donde se podran colocar las cartas del jugador
-    ImageIcon dorsoCarta = new ImageIcon(new ImageIcon("imagenes/card_back_blue.png").getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+    ImageIcon dorsoCarta = new ImageIcon(new ImageIcon("imagenes/card_back_blue.png").getImage().getScaledInstance(60, 90, Image.SCALE_SMOOTH));
     
     public PanelPrincipal(TaulaJoc m){
         ////////////////    TAULAJOC - PANEL CENTRAL////////////////////////////
@@ -181,6 +182,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 if (barajas[CPU+1].getCarta(i).esPosiblePoner(mesa)){
                     System.out.println("LA CPU" + CPU + "HA ENCONTRADO UNA CARTA");
                     mesa.ponerCarta(barajas[CPU+1].getCarta(i));
+                    panelControl.setTexto("El jugador " + (CPU+1) + " pone el " + barajas[CPU+1].getCarta(i).toString());
                     barajas[CPU+1].borrarCarta(i);
                     
                     numCartasCPUs[CPU]--;
@@ -189,16 +191,21 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 }
             }
         }
+        
+        if (jugar == true){
+            panelControl.setTexto("El jugador " + (CPU+1) + " pasa");
+        }
     }
     
     @Override
     public void mouseClicked(MouseEvent e){
         int x = e.getX();
-        if (barajas != null && barajas[0] != null){
+        if (panelControl.getEstado() == Estado.TURNOHUMANO && barajas != null && barajas[0] != null){ // Si es el turno del jugador humano y la carta que ha clickeado no es null
             int idxCarta = (x*13/this.getWidth());
             if (barajas[0].getCarta(idxCarta) != null && barajas[0].getCarta(idxCarta).esPosiblePoner(mesa)){
                 System.out.println("ES POSIBLE PONER!!!");
                 mesa.ponerCarta(barajas[0].getCarta(idxCarta));
+                panelControl.setTexto("Has puesto el " + barajas[0].getCarta(idxCarta).toString());
                 barajas[0].borrarCarta(idxCarta);
                 arrayCasillasJugador[idxCarta].removeAll();
                 
@@ -207,6 +214,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 panelControl.turnoMaquina();
             } else{
                 System.out.println("NO ES POSIBLE PONER...");
+                Toolkit.getDefaultToolkit().beep();
             }
         }
     }

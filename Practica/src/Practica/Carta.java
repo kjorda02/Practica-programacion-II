@@ -41,7 +41,7 @@ public class Carta {
                 break;
         }
         
-        imagen = new ImageIcon(new ImageIcon(pathImagen).getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+        imagen = new ImageIcon(new ImageIcon(pathImagen).getImage().getScaledInstance(60, 90, Image.SCALE_SMOOTH));
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
@@ -97,19 +97,20 @@ public class Carta {
     
     @Override
     public String toString(){
-        String s = "";
+        String s = "[";
+        s += numero;
         switch(palo){
             case TREBOLES:
-                s += "TREBOLES";
+                s += " treboles]";
                 break;
             case PICAS:
-                s += "PICAS";
+                s += " picas]";
                 break;
             case CORAZONES:
-                s += "CORAZONES";
+                s += " corazones]";
                 break;
             case DIAMANTES:
-                s += "DIAMANTES";
+                s += " diamantes]";
                 break;
         }
         return s;

@@ -59,7 +59,12 @@ public class PanelInferior extends JPanel implements ActionListener {
             case "Reiniciar":
                 jugar.setEnabled(false);
                 reiniciar.setEnabled(false);
+                mezclar.setEnabled(true);
                 panelPrincipal.reiniciar();
+                break;
+            case "Jugar":
+                mezclar.setEnabled(false);
+                panelPrincipal.repartir();
                 break;
         }
     }

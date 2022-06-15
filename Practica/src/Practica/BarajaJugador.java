@@ -13,13 +13,8 @@ public class BarajaJugador {
     //private final boolean jugadorHumano;
     private Carta[] cartas;
     
-    public BarajaJugador(TaulaJoc m, boolean jug){
-        cartas = m.repartir();
-        //jugadorHumano = jug;
-    }
-    
-    public BarajaJugador(TaulaJoc m){
-        cartas = m.repartir();
+    public BarajaJugador(Carta[] c){
+        cartas = c;
         //jugadorHumano = false;
     }
     

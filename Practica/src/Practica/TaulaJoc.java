@@ -18,8 +18,7 @@ import javax.swing.JPanel;
  * @author kjorda
  */
 public class TaulaJoc extends JPanel{
-    private Carta[] cartas;
-    private int indice; // Indica que cartas han sido repartidas   
+    private Carta[] cartas; // Contiene la carta que hay en cada posicion de la mesa. Null si no hay ninguna.
     private JPanel[] rejilla; // Paneles que componen la "mesa"
     Baraja b = new Baraja();
     
@@ -45,14 +44,9 @@ public class TaulaJoc extends JPanel{
         }
     }
     
-    public boolean isVacia(){
-        return false;
-    }
-    
     public void reiniciar(){
         for (int i = 0; i < 52; i++){ // Copiamos las cartas de la baraja al array de las cartas que tiene la mesa
             cartas[i] = b.getCarta(i);
-            //System.out.println(String.valueOf(b.getCarta(i).getNumero()));
         }
         
         actualizar();
@@ -86,26 +80,36 @@ public class TaulaJoc extends JPanel{
         repaint();
     }
     
+    
+    public BarajaJugador[] repartir(){ // Devuelve un array de 4 barajasJugador, que contienen 13 cartas cada una
+        
+        BarajaJugador[] bar = new BarajaJugador[4];
+        Carta[] cartasJugador = new Carta[13];;
+
+        for (int i = 0; i < 4; i++){ // Para cada baraja
+            cartasJugador = new Carta[13]; // Importante hacerlo EXACTAMENTE aqui
+            for (int j = 0; j < 13; j++){ // Para cada una de las 13 cartas
+                cartasJugador[j] = cartas[(i*13) + j]; // Cogerla de el array grande y meterla en el pequeño
+                cartas[(i*13) + j] = null; // Borrarla del array grande
+            }
+            bar[i] = new BarajaJugador(cartasJugador); // Crear una barajaJugador con las cartas del array pequeño
+        }
+        
+        actualizar(); // Borra las cartas que se han puesto a null (todas)
+        
+        return bar;
+    }
+    
+    
+    public boolean isVacia(){
+        return false;
+    }
+    
     public boolean isNull(int idx){ // Indica si hay una carta en una posicion concreta de la baraja
         return (cartas[idx] == null);
     }
     
     public void ponerCarta(Carta c){
         cartas[c.getPos()] = c;
-    }
-       
-    
-    public Carta[] repartir(){ // Devuelve un array de cartas repartidas y las quita de la Mesa
-        if (indice > 3){ // Si indice = 4 no quedan cartas para repartir
-            return null;
-        }
-        Carta[] barajaJugador = new Carta[13];
-
-        for (int i = 0; i < 13; i++){
-            barajaJugador[i] = cartas[(indice*13) + i];
-            cartas[(indice*13) + i] = null;
-        }
-        indice++;
-        return barajaJugador;
     }
 }

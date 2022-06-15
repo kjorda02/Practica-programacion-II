@@ -29,7 +29,7 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     BarajaJugador[] barajas;
     
     JLabel indicadorCartasHumano;
-    JPanel[] ArrayCasillas = new JPanel[13]; // Estos JPanels formaran las casillas donde se podran colocar las cartas del jugador
+    JPanel[] arrayCasillasJugador = new JPanel[13]; // Estos JPanels formaran las casillas donde se podran colocar las cartas del jugador
     
     public PanelPrincipal(TaulaJoc m){
         ////////////////    TAULAJOC - PANEL CENTRAL////////////////////////////
@@ -49,12 +49,12 @@ public class PanelPrincipal extends JPanel implements ActionListener{
             p.setPreferredSize(new Dimension(76,106));
             p.setBorder(BorderFactory.createLineBorder(new Color(00, 102,00),3));
             p.setBackground(new Color(00,i==0?82:102,00)); //#006600 / #00520
-            ArrayCasillas[i] = p;
+            arrayCasillasJugador[i] = p;
         }
 
         panelCartasHumano.setBackground(new Color(00,102,00));
         for (int i = 0; i < 13; i++){ // Añadimos las casillas al panel
-            panelCartasHumano.add(ArrayCasillas[i]);
+            panelCartasHumano.add(arrayCasillasJugador[i]);
         }
         panelInferior.add(panelCartasHumano, BorderLayout.CENTER);
         
@@ -73,21 +73,27 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         
     }
     
-    public void repartir(){
-        for (int i = 0; i < 13; i++){
-            ArrayCasillas[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
-        }
-        revalidate();
-        repaint();
-    }
-    
-    
     public void mezclar(){
         mesa.mezclar();
     }
     
     public void reiniciar(){
         mesa.reiniciar();
+        for (int i = 0; i < 13; i++){
+            arrayCasillasJugador[i].removeAll();
+            revalidate();
+            repaint();
+        }  
+    }
+    
+    public void repartir(){
+        barajas = mesa.repartir();
+        
+        for (int i = 0; i < 13; i++){  // Añadir las cartas repartidas a las casillas de abajo
+            arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
+        }
+        revalidate();
+        repaint();
     }
     
     public void actIndicadorCartasHumano(){

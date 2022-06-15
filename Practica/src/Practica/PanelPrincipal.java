@@ -81,9 +81,13 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         mesa.reiniciar();
         for (int i = 0; i < 13; i++){
             arrayCasillasJugador[i].removeAll();
-            revalidate();
-            repaint();
-        }  
+        
+        }
+        numCartasHumano = 0;
+        actIndicadorCartasHumano();
+        
+        revalidate();
+        repaint();
     }
     
     public void repartir(){
@@ -92,12 +96,17 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         for (int i = 0; i < 13; i++){  // Añadir las cartas repartidas a las casillas de abajo
             arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
         }
+        numCartasHumano = 13;
+        actIndicadorCartasHumano();
+        
         revalidate();
         repaint();
     }
     
     public void actIndicadorCartasHumano(){
         indicadorCartasHumano.setText(String.valueOf(numCartasHumano));
+        revalidate();
+        repaint();
     }
     
     @Override

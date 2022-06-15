@@ -21,6 +21,7 @@ public class TaulaJoc extends JPanel{
     private Carta[] cartas; // Contiene la carta que hay en cada posicion de la mesa. Null si no hay ninguna.
     private JPanel[] rejilla; // Paneles que componen la "mesa"
     Baraja b = new Baraja();
+    boolean vacia = false;
     
     public TaulaJoc(){ // Constructor - crea todos los subpaneles etc
         setBackground(new Color(00, 102,00));
@@ -65,13 +66,13 @@ public class TaulaJoc extends JPanel{
         actualizar();
     }
     
-    public void actualizar(){
+    public void actualizar(){ // Actualiza el array de Jpanels rejilla dependiendo del array de cartas carta
         for (int i = 0; i < 52; i++){
-            if (cartas[i] != null){
-                JLabel carta = new JLabel(cartas[i].getImagen());
-                rejilla[i].removeAll();
-                rejilla[i].add(carta);
-            } else{
+            if (cartas[i] != null){ // Si hay una carta en esa posicion
+                JLabel carta = new JLabel(cartas[i].getImagen()); // Coger el icono de esa carta y crear una JLabel con el
+                rejilla[i].removeAll(); // Limpiar ese Jpanel
+                rejilla[i].add(carta); // Añadir la nueva JLabel a esa posicion
+            } else{ // Si una posicion es null no hay carta asi que quitamos todo lo que habia en ese JPanel
                 rejilla[i].removeAll();
             }
         }
@@ -97,12 +98,13 @@ public class TaulaJoc extends JPanel{
         
         actualizar(); // Borra las cartas que se han puesto a null (todas)
         
+        vacia = true;
         return bar;
     }
     
     
     public boolean isVacia(){
-        return false;
+        return vacia;
     }
     
     public boolean isNull(int idx){ // Indica si hay una carta en una posicion concreta de la baraja
@@ -111,5 +113,6 @@ public class TaulaJoc extends JPanel{
     
     public void ponerCarta(Carta c){
         cartas[c.getPos()] = c;
+        vacia = false;
     }
 }

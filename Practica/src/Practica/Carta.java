@@ -73,20 +73,22 @@ public class Carta {
     }
     
     public boolean esPosiblePoner(TaulaJoc m){ // Devuelve true si la carta se puede colocar en la mesa, y false en caso contrario
+        //System.out.println(numero);
+        //System.out.println(m.isVacia());
         if (m.isVacia() && this.numero != 7){ // Si la baraja esta vacia solo se puede colocar un 7
             return false;
         }
         
-        if (!m.isNull(posicion-1)){ // Carta de la izquierda
+        if (!((posicion % 13) == 0) && !m.isNull(posicion-1)){ // Si esta carta no esta en el borde de la izquierda y tiene una carta adyacente a la izquierda
             return true;
         }
-        if (!m.isNull(posicion+1)){ // Carta de la derecha
+        if (!((posicion % 13) == 12) && !m.isNull(posicion+1)){ // Si esta carta no esta en el borde de la derecha y tiene una carta adyacente a la derecha
             return true;
         }
-        if (!m.isNull(posicion-13)){ // Carta de arriba
+        if (!(posicion < 13) && !m.isNull(posicion-13)){ // Si esta carta no esta en el borde de arriba y tiene una carta adyacente encima
             return true;
         }
-        if (!m.isNull(posicion+13)){ // Carta de abajo
+        if (!(posicion > 38) && !m.isNull(posicion+13)){ // Si esta carta no esta en el borde de abajo y tiene una carta adyacente abajo
             return true;
         }
         return false;

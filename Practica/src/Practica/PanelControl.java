@@ -23,12 +23,6 @@ public class PanelControl extends JPanel implements ActionListener {
     JButton mezclar, jugar, reiniciar, passa, tornJugador;
     PanelPrincipal panelPrincipal;
     
-    enum Estado{
-        MENU,
-        TURNOHUMANO,
-        TURNOMAQUINA
-    }
-    
     Estado estadoPartida = Estado.MENU;
     
     public PanelControl(PanelPrincipal p){
@@ -116,5 +110,9 @@ public class PanelControl extends JPanel implements ActionListener {
         
         revalidate();
         repaint();
+    }
+    
+    public Estado getEstado(){
+        return estadoPartida;
     }
 }

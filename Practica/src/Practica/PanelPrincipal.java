@@ -11,8 +11,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  * @author kjorda
  */
 // Este es el panel principal, que contiene los paneles de las cartas en la mesa, el de las cartas del jugador, y el del numero de cartas de los jugadores artificiales
-public class PanelPrincipal extends JPanel implements ActionListener{
+public class PanelPrincipal extends JPanel implements MouseListener{
     JPanel panelSuperior, panelInferior;
     TaulaJoc mesa;
     
@@ -48,7 +48,7 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         
         // --- PANEL CARTAS HUMANO --- //
         
-        for (int i = 0; i < 13; i++){ // Creamos los JPanel de las casillas donde se meteran las cartas
+        for (int i = 0; i < 13; i++){ // Creamos los 13 JPanel de las casillas donde se meteran las cartas
             JPanel p = new JPanel();
             p.setPreferredSize(new Dimension(76,106));
             p.setBorder(BorderFactory.createLineBorder(new Color(00, 102,00),3));
@@ -57,9 +57,11 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         }
 
         panelCartasHumano.setBackground(new Color(00,102,00));
+        panelCartasHumano.addMouseListener(this);
         for (int i = 0; i < 13; i++){ // Añadimos las casillas al panel
             panelCartasHumano.add(arrayCasillasJugador[i]);
         }
+        
         panelInferior.add(panelCartasHumano, BorderLayout.CENTER);
         
         // --- Indicador numero de cartas humano --- //
@@ -114,8 +116,14 @@ public class PanelPrincipal extends JPanel implements ActionListener{
             arrayCasillasJugador[i].removeAll();
         
         }
+        barajas = null;
+        
         numCartasHumano = 0;
-        actIndicadoresCartas();
+        numCartasCPU1 = 0;
+        numCartasCPU2 = 0;
+        numCartasCPU3 = 0;
+        actIndicadorHumano();
+        actIndicadoresCPU();
         
         revalidate();
         repaint();
@@ -134,15 +142,20 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         numCartasCPU1 = 13;
         numCartasCPU2 = 13;
         numCartasCPU3 = 13;
-        actIndicadoresCartas();
+        actIndicadorHumano();
+        actIndicadoresCPU();
         
         revalidate();
         repaint();
     }
     
-    public void actIndicadoresCartas(){
+    public void actIndicadorHumano(){
         indicadorCartasHumano.setText(String.valueOf(numCartasHumano));
-        
+        revalidate();
+        repaint();
+    }
+    
+    public void actIndicadoresCPU(){
         if (numCartasCPU1 > 0){
             etiquetasNumCartasCPU[0].setIcon(dorsoCarta);
         }
@@ -164,7 +177,38 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     }
     
     @Override
-    public void actionPerformed(ActionEvent evento){
+    public void mouseClicked(MouseEvent e){
+        int x = e.getX();
+        if (barajas != null && barajas[0] != null){
+            int idxCarta = (x*13/this.getWidth());
+            if (barajas[0].getCarta(idxCarta) != null && barajas[0].getCarta(idxCarta).esPosiblePoner(mesa)){
+                System.out.println("ES POSIBLE PONER!!!");
+                
+            } else{
+                System.out.println("NO ES POSIBLE PONER...");
+            }
+        }
+        
+    }
+    
+    
+    @Override
+    public void mousePressed(MouseEvent e){
+        
+    }
+    
+    @Override
+    public void mouseReleased(MouseEvent e){
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
         
     }
     

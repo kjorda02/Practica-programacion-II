@@ -113,7 +113,6 @@ public class TaulaJoc extends JPanel{
     
     public void ponerCarta(Carta c){
         int pos = c.getPos();
-        System.out.println(pos);
         cartas[pos] = c;
         rejilla[pos].removeAll();
         JLabel icono = new JLabel(cartas[pos].getImagen());

@@ -146,4 +146,9 @@ public class PanelControl extends JPanel implements ActionListener {
     public void setTexto(String s){
         texto.setText(s);
     }
+    
+    public void finPartida(){
+        passa.setEnabled(false);
+        tornJugador.setEnabled(false);
+    }
 }

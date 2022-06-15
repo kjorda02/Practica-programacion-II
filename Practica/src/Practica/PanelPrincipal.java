@@ -141,10 +141,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         barajas = mesa.repartir();
         
         for (int i = 0; i < 13; i++){  // Añadir las cartas repartidas a las casillas de abajo
-            if (barajas[0].getCarta(i) == null){
-                System.out.println("ERRORRRRRRR: " + "en la carta " + i);
-            }
-            arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen())); // Bug al jugar por 2a vez
+            arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
         }
         numCartasHumano = 13;
         actIndicadorHumano();
@@ -169,7 +166,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
             etiquetasNumCartasCPU[CPU].setIcon(dorsoCarta);
         }
         
-        etiquetasNumCartasCPU[CPU].setText(String.valueOf(numCartasCPUs[0]));
+        etiquetasNumCartasCPU[CPU].setText(String.valueOf(numCartasCPUs[CPU]));
         
         revalidate();
         repaint();
@@ -180,13 +177,18 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         for (int i = 0; i < 13 && jugar; i++){
             if (barajas[CPU+1] != null && barajas[CPU+1].getCarta(i) != null){ // CPU+1 ya que la barajas 0 esta reservada para el jugador humano
                 if (barajas[CPU+1].getCarta(i).esPosiblePoner(mesa)){
-                    System.out.println("LA CPU" + CPU + "HA ENCONTRADO UNA CARTA");
+                    if (numCartasCPUs[CPU] == 1){
+                        VentanaFinPartida v = new VentanaFinPartida(CPU+1);
+                    }
                     mesa.ponerCarta(barajas[CPU+1].getCarta(i));
                     panelControl.setTexto("El jugador " + (CPU+1) + " pone el " + barajas[CPU+1].getCarta(i).toString());
                     barajas[CPU+1].borrarCarta(i);
                     
-                    numCartasCPUs[CPU]--;
+                    numCartasCPUs[CPU] = numCartasCPUs[CPU] - 1;
                     actIndicadorCPU(CPU); // Ya hace el revalidate y repaint
+                    if (numCartasCPUs[CPU] == 0){
+                        panelControl.finPartida();
+                    }
                     jugar = false;
                 }
             }
@@ -203,7 +205,9 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         if (panelControl.getEstado() == Estado.TURNOHUMANO && barajas != null && barajas[0] != null){ // Si es el turno del jugador humano y la carta que ha clickeado no es null
             int idxCarta = (x*13/this.getWidth());
             if (barajas[0].getCarta(idxCarta) != null && barajas[0].getCarta(idxCarta).esPosiblePoner(mesa)){
-                System.out.println("ES POSIBLE PONER!!!");
+                if (numCartasHumano == 1){
+                    VentanaFinPartida v = new VentanaFinPartida(0);
+                }
                 mesa.ponerCarta(barajas[0].getCarta(idxCarta));
                 panelControl.setTexto("Has puesto el " + barajas[0].getCarta(idxCarta).toString());
                 barajas[0].borrarCarta(idxCarta);
@@ -211,9 +215,13 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 
                 numCartasHumano--;
                 actIndicadorHumano();
-                panelControl.turnoMaquina();
+                
+                if (numCartasHumano == 0){
+                    panelControl.finPartida();
+                }else{
+                    panelControl.turnoMaquina();
+                }
             } else{
-                System.out.println("NO ES POSIBLE PONER...");
                 Toolkit.getDefaultToolkit().beep();
             }
         }

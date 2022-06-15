@@ -46,7 +46,7 @@ public class Ventana extends JFrame{
         mesa.actualizar();
         
         PanelPrincipal panelCtr = new PanelPrincipal(mesa);
-        PanelInferior panelInf = new PanelInferior(panelCtr); // El panel que tendra los botones y el texto informativo
+        PanelControl panelInf = new PanelControl(panelCtr); // El panel que tendra los botones y el texto informativo
         
         panelContenidos.add(panelCtr, BorderLayout.CENTER);
         panelContenidos.add(panelInf, BorderLayout.SOUTH);

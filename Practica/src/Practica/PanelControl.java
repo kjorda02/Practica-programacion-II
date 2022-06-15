@@ -17,13 +17,21 @@ import javax.swing.JTextArea;
  *
  * @author kjorda
  */
-public class PanelInferior extends JPanel implements ActionListener {
+public class PanelControl extends JPanel implements ActionListener {
     JPanel panelBotones;
     JTextArea texto;
-    JButton mezclar, jugar, reiniciar;
+    JButton mezclar, jugar, reiniciar, passa, tornJugador;
     PanelPrincipal panelPrincipal;
     
-    public PanelInferior(PanelPrincipal p){
+    enum Estado{
+        MENU,
+        TURNOHUMANO,
+        TURNOMAQUINA
+    }
+    
+    Estado estadoPartida = Estado.MENU;
+    
+    public PanelControl(PanelPrincipal p){
         panelPrincipal = p;
         this.setLayout(new BorderLayout());
         
@@ -45,7 +53,6 @@ public class PanelInferior extends JPanel implements ActionListener {
         reiniciar.setEnabled(false);
         panelBotones.add(reiniciar);
         add(panelBotones, BorderLayout.CENTER);
-        
     }
     
     @Override
@@ -57,15 +64,57 @@ public class PanelInferior extends JPanel implements ActionListener {
                 panelPrincipal.mezclar();
                 break;
             case "Reiniciar":
+                if (estadoPartida == Estado.TURNOHUMANO || estadoPartida == Estado.TURNOMAQUINA){
+                    botonesIniciales();
+                }
                 jugar.setEnabled(false);
                 reiniciar.setEnabled(false);
                 mezclar.setEnabled(true);
                 panelPrincipal.reiniciar();
                 break;
             case "Jugar":
-                mezclar.setEnabled(false);
+                turnoHumano();
                 panelPrincipal.repartir();
                 break;
+            case "Passa":
+                turnoMaquina();
         }
+    }
+    
+    public void turnoHumano(){
+        estadoPartida = Estado.TURNOHUMANO;
+        panelBotones.removeAll();
+        
+        passa = new JButton("Passa");
+        passa.addActionListener(this);
+        panelBotones.add(passa);
+        panelBotones.add(reiniciar);
+        
+        revalidate();
+        repaint();
+    }
+    
+    public void turnoMaquina(){
+        estadoPartida = Estado.TURNOMAQUINA;
+        panelBotones.removeAll();
+        
+        tornJugador = new JButton("Torn Jugador");
+        tornJugador.addActionListener(this);
+        panelBotones.add(tornJugador);
+        panelBotones.add(reiniciar);
+        
+        revalidate();
+        repaint();
+    }
+    
+    public void botonesIniciales(){
+        estadoPartida = Estado.MENU;
+        panelBotones.removeAll();
+        panelBotones.add(mezclar);
+        panelBotones.add(jugar);
+        panelBotones.add(reiniciar);
+        
+        revalidate();
+        repaint();
     }
 }

@@ -25,27 +25,5 @@ public class Practica {
     
     private void prueba2(){
         Ventana pr = new Ventana();
-        //pr.revalidate();
-        //  pr.repaint();
     }
-    
-    private void prueba(){
-        Carta[] prueba = new Carta[52];
-        
-        Random r = new Random();
-        
-        for (int i = 0; i < 52; i++){
-            int palo = r.nextInt(4);
-            Palo pal = Palo.values()[palo];
-            prueba[i] = new Carta(i%13, pal);
-        }
-        
-        Baraja bar = new Baraja();
-        System.out.println(bar.toString());
-        System.out.println("---------------");
-        for (int i = 0; i < 4; i++){
-            //System.out.println((new BarajaJugador(bar)).toString());
-        }
-    }
-    
 }

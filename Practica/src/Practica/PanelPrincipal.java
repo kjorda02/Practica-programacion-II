@@ -94,7 +94,10 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         barajas = mesa.repartir();
         
         for (int i = 0; i < 13; i++){  // Añadir las cartas repartidas a las casillas de abajo
-            arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen()));
+            if (barajas[0].getCarta(i) == null){
+                System.out.println("ERRORRRRRRR: " + "en la carta " + i);
+            }
+            arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen())); // Bug al jugar por 2a vez
         }
         numCartasHumano = 13;
         actIndicadorCartasHumano();

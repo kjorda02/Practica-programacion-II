@@ -29,7 +29,6 @@ public class Ventana extends JFrame{
         this.setTitle("Practica programacion II");
         panelContenidos.setBackground(new Color(00, 102,00)); //#006600
 
-        this.setSize(960,720);
         this.setResizable(false);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,23 +37,23 @@ public class Ventana extends JFrame{
         ////////////////////////////////////////////////////////////////////////
         
         
-        
         mesa = new TaulaJoc(new Baraja()); // Creamos una nueva mesa
         barajas = new BarajaJugador[4];
-        for (int i=0; i < 4; i++){
-            barajas[i] = new BarajaJugador(mesa);
+        for (int i=0; i < 4; i++){ // Repartimos las cartas de la mesa a 4 objetos barajaJugador
+           // barajas[i] = new BarajaJugador(mesa);
         }
         
         mesa.actualizar();
         
         PanelInferior panelInf = new PanelInferior(mesa); // El panel que tendra los botones y el texto informativo
-        PanelCentral panelCtr = new PanelCentral(mesa, barajas);
+        PanelPrincipal panelCtr = new PanelPrincipal(mesa);
         
         panelContenidos.add(panelCtr, BorderLayout.CENTER);
         panelContenidos.add(panelInf, BorderLayout.SOUTH);
 
         
         //VISUALIZACIÓN CONTENEDOR JFrame ventana
+        this.pack();
         this.setVisible(true);
     }
 }

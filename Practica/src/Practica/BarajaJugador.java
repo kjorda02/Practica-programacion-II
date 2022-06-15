@@ -4,7 +4,6 @@
  */
 package Practica;
 
-import javax.swing.JPanel;
 
 /**
  *

@@ -24,7 +24,7 @@ public class Carta {
     public Carta(int num, Palo pal){
         numero = num;
         palo = pal;
-        posicion = this.getPos();
+        posicion = calcPos();
         String pathImagen = "imagenes/"+numero+"_of_";
         switch(palo){
             case TREBOLES:
@@ -42,17 +42,16 @@ public class Carta {
         }
         
         imagen = new ImageIcon(new ImageIcon(pathImagen).getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
-
     }
 
     public int calcPos(){ // Donde se deberia colocar la carta en la baraja
-        int pos = 0; 
+        int pos = 0;
         for (int i = 0; i < 4; i++){
             if (Palo.values()[i] == palo){
                 pos = i*13;
             }
         }
-        pos += numero;
+        pos += numero - 1; // -1 Porque empezamos a contar por 0 y las cartas empiezan por 1
         return pos;
     }
     
@@ -77,6 +76,8 @@ public class Carta {
         //System.out.println(m.isVacia());
         if (m.isVacia() && this.numero != 7){ // Si la baraja esta vacia solo se puede colocar un 7
             return false;
+        } else if (m.isVacia()){
+            return true;
         }
         
         if (!((posicion % 13) == 0) && !m.isNull(posicion-1)){ // Si esta carta no esta en el borde de la izquierda y tiene una carta adyacente a la izquierda

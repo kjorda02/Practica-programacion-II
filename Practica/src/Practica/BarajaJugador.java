@@ -22,6 +22,10 @@ public class BarajaJugador {
         return cartas[pos];
     }
     
+    public void borrarCarta(int pos){
+        cartas[pos] = null;
+    }
+    
     public boolean ponerCarta(int idx, TaulaJoc m){
         if (cartas[idx].esPosiblePoner(m)){
             m.ponerCarta(cartas[idx]);

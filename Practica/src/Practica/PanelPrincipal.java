@@ -183,14 +183,18 @@ public class PanelPrincipal extends JPanel implements MouseListener{
             int idxCarta = (x*13/this.getWidth());
             if (barajas[0].getCarta(idxCarta) != null && barajas[0].getCarta(idxCarta).esPosiblePoner(mesa)){
                 System.out.println("ES POSIBLE PONER!!!");
+                mesa.ponerCarta(barajas[0].getCarta(idxCarta));
+                barajas[0].borrarCarta(idxCarta);
+                arrayCasillasJugador[idxCarta].removeAll();
                 
+                numCartasHumano--;
+                actIndicadorHumano(); // Ya hace el revalidate y repaint esto
             } else{
                 System.out.println("NO ES POSIBLE PONER...");
             }
         }
         
     }
-    
     
     @Override
     public void mousePressed(MouseEvent e){

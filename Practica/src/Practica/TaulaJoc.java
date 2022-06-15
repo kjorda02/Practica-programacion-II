@@ -69,9 +69,9 @@ public class TaulaJoc extends JPanel{
     public void actualizar(){ // Actualiza el array de Jpanels rejilla dependiendo del array de cartas carta
         for (int i = 0; i < 52; i++){
             if (cartas[i] != null){ // Si hay una carta en esa posicion
-                JLabel carta = new JLabel(cartas[i].getImagen()); // Coger el icono de esa carta y crear una JLabel con el
+                JLabel icono = new JLabel(cartas[i].getImagen()); // Coger el icono de esa carta y crear una JLabel con el
                 rejilla[i].removeAll(); // Limpiar ese Jpanel
-                rejilla[i].add(carta); // Añadir la nueva JLabel a esa posicion
+                rejilla[i].add(icono); // Añadir la nueva JLabel a esa posicion
             } else{ // Si una posicion es null no hay carta asi que quitamos todo lo que habia en ese JPanel
                 rejilla[i].removeAll();
             }
@@ -112,7 +112,15 @@ public class TaulaJoc extends JPanel{
     }
     
     public void ponerCarta(Carta c){
-        cartas[c.getPos()] = c;
+        int pos = c.getPos();
+        System.out.println(pos);
+        cartas[pos] = c;
+        rejilla[pos].removeAll();
+        JLabel icono = new JLabel(cartas[pos].getImagen());
+        rejilla[pos].add(icono); // No usamos actualizar() directamente ya que solo hace falta actualizar una casilla
+        
+        revalidate();
+        repaint();
         vacia = false;
     }
 }

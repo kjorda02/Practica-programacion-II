@@ -27,6 +27,7 @@ public class PanelControl extends JPanel implements ActionListener {
     
     public PanelControl(PanelPrincipal p){
         panelPrincipal = p;
+        panelPrincipal.setPanelControl(this);
         this.setLayout(new BorderLayout());
         
         // Panel botones (crea el del principio de la partida)
@@ -65,7 +66,6 @@ public class PanelControl extends JPanel implements ActionListener {
                 reiniciar.setEnabled(false);
                 mezclar.setEnabled(true);
                 panelPrincipal.reiniciar();
-                estadoPartida = Estado.MENU;
                 break;
             case "Jugar":
                 turnoHumano();

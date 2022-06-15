@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 public class PanelPrincipal extends JPanel implements MouseListener{
     JPanel panelSuperior, panelInferior;
     TaulaJoc mesa;
+    PanelControl panelControl;
     
     int numCartasHumano = 0;
     int[] numCartasCPUs = {0, 0, 0};
@@ -105,6 +106,10 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         }
         
         add(panelSuperior, BorderLayout.NORTH);
+    }
+    
+    public void setPanelControl(PanelControl pan){
+        panelControl = pan;
     }
     
     public void mezclar(){
@@ -199,11 +204,11 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 
                 numCartasHumano--;
                 actIndicadorHumano();
+                panelControl.turnoMaquina();
             } else{
                 System.out.println("NO ES POSIBLE PONER...");
             }
         }
-        
     }
     
     @Override

@@ -11,5 +11,7 @@ package Practica;
 enum Estado{
         MENU,
         TURNOHUMANO,
-        TURNOMAQUINA
+        TURNOCPU0,
+        TURNOCPU1,
+        TURNOCPU2
     }

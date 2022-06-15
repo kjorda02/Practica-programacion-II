@@ -27,7 +27,8 @@ public class PanelPrincipal extends JPanel implements MouseListener{
     JPanel panelSuperior, panelInferior;
     TaulaJoc mesa;
     
-    int numCartasHumano = 0, numCartasCPU1 = 0, numCartasCPU2 = 0, numCartasCPU3 = 0;
+    int numCartasHumano = 0;
+    int[] numCartasCPUs = {0, 0, 0};
     BarajaJugador[] barajas;
     
     JLabel indicadorCartasHumano;
@@ -119,11 +120,12 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         barajas = null;
         
         numCartasHumano = 0;
-        numCartasCPU1 = 0;
-        numCartasCPU2 = 0;
-        numCartasCPU3 = 0;
         actIndicadorHumano();
-        actIndicadoresCPU();
+        
+        for (int i = 0; i < 3; i++){
+            numCartasCPUs[i] = 0;
+            actIndicadorCPU(i);
+        }
         
         revalidate();
         repaint();
@@ -139,11 +141,12 @@ public class PanelPrincipal extends JPanel implements MouseListener{
             arrayCasillasJugador[i].add(new JLabel(barajas[0].getCarta(i).getImagen())); // Bug al jugar por 2a vez
         }
         numCartasHumano = 13;
-        numCartasCPU1 = 13;
-        numCartasCPU2 = 13;
-        numCartasCPU3 = 13;
         actIndicadorHumano();
-        actIndicadoresCPU();
+        
+        for (int i = 0; i < 3; i++){
+            numCartasCPUs[i] = 13;
+            actIndicadorCPU(i);
+        }
         
         revalidate();
         repaint();
@@ -155,25 +158,32 @@ public class PanelPrincipal extends JPanel implements MouseListener{
         repaint();
     }
     
-    public void actIndicadoresCPU(){
-        if (numCartasCPU1 > 0){
-            etiquetasNumCartasCPU[0].setIcon(dorsoCarta);
+    public void actIndicadorCPU(int CPU){
+        if (numCartasCPUs[CPU] > 0){
+            etiquetasNumCartasCPU[CPU].setIcon(dorsoCarta);
         }
         
-        if (numCartasCPU2 > 0){
-            etiquetasNumCartasCPU[1].setIcon(dorsoCarta);
-        }
-        
-        if (numCartasCPU3 > 0){
-            etiquetasNumCartasCPU[2].setIcon(dorsoCarta);
-        }
-        
-        etiquetasNumCartasCPU[0].setText(String.valueOf(numCartasCPU1));
-        etiquetasNumCartasCPU[1].setText(String.valueOf(numCartasCPU2));
-        etiquetasNumCartasCPU[2].setText(String.valueOf(numCartasCPU3));
+        etiquetasNumCartasCPU[CPU].setText(String.valueOf(numCartasCPUs[0]));
         
         revalidate();
         repaint();
+    }
+    
+    public void jugarCPU(int CPU){
+        boolean jugar = true;
+        for (int i = 0; i < 13 && jugar; i++){
+            if (barajas[CPU+1] != null && barajas[CPU+1].getCarta(i) != null){ // CPU+1 ya que la barajas 0 esta reservada para el jugador humano
+                if (barajas[CPU+1].getCarta(i).esPosiblePoner(mesa)){
+                    System.out.println("LA CPU" + CPU + "HA ENCONTRADO UNA CARTA");
+                    mesa.ponerCarta(barajas[CPU+1].getCarta(i));
+                    barajas[CPU+1].borrarCarta(i);
+                    
+                    numCartasCPUs[CPU]--;
+                    actIndicadorCPU(CPU); // Ya hace el revalidate y repaint
+                    jugar = false;
+                }
+            }
+        }
     }
     
     @Override
@@ -188,7 +198,7 @@ public class PanelPrincipal extends JPanel implements MouseListener{
                 arrayCasillasJugador[idxCarta].removeAll();
                 
                 numCartasHumano--;
-                actIndicadorHumano(); // Ya hace el revalidate y repaint esto
+                actIndicadorHumano();
             } else{
                 System.out.println("NO ES POSIBLE PONER...");
             }

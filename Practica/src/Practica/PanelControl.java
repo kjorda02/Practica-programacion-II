@@ -58,13 +58,14 @@ public class PanelControl extends JPanel implements ActionListener {
                 panelPrincipal.mezclar();
                 break;
             case "Reiniciar":
-                if (estadoPartida == Estado.TURNOHUMANO || estadoPartida == Estado.TURNOMAQUINA){
+                if (estadoPartida != Estado.MENU){
                     botonesIniciales();
                 }
                 jugar.setEnabled(false);
                 reiniciar.setEnabled(false);
                 mezclar.setEnabled(true);
                 panelPrincipal.reiniciar();
+                estadoPartida = Estado.MENU;
                 break;
             case "Jugar":
                 turnoHumano();
@@ -72,6 +73,21 @@ public class PanelControl extends JPanel implements ActionListener {
                 break;
             case "Passa":
                 turnoMaquina();
+                break;
+            case "Torn Jugador":
+                panelPrincipal.jugarCPU(estadoPartida.ordinal() - 2);
+                switch(estadoPartida){
+                    case TURNOCPU0:
+                        estadoPartida = Estado.TURNOCPU1;
+                        break;
+                    case TURNOCPU1:
+                        estadoPartida = Estado.TURNOCPU2;
+                        break;
+                    case TURNOCPU2:
+                        estadoPartida = Estado.TURNOHUMANO;
+                        turnoHumano();
+                        break;
+                }
         }
     }
     
@@ -89,7 +105,7 @@ public class PanelControl extends JPanel implements ActionListener {
     }
     
     public void turnoMaquina(){
-        estadoPartida = Estado.TURNOMAQUINA;
+        estadoPartida = Estado.TURNOCPU0;
         panelBotones.removeAll();
         
         tornJugador = new JButton("Torn Jugador");

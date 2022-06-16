@@ -53,7 +53,6 @@ public class VentanaFinPartida extends JDialog implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getActionCommand() == "Aceptar"){
-            System.out.println("DIPOSEEEEE");
             dispose();
         }
     }

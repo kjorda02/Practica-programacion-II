@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Krishna Jorda Jimenez y Alberto Ruiz
+// https://youtu.be/3XDviEPh_M8
 package Practica;
 
 import java.awt.Dimension;

@@ -96,6 +96,10 @@ public class PanelControl extends JPanel implements ActionListener {
                         estadoPartida = Estado.TURNOHUMANO;
                         turnoHumano();
                         break;
+                    case FINPARTIDA:
+                        passa.setEnabled(false);
+                        tornJugador.setEnabled(false);
+                        break;
                 }
         }
     }
@@ -146,7 +150,6 @@ public class PanelControl extends JPanel implements ActionListener {
     }
     
     public void finPartida(){
-        passa.setEnabled(false);
-        tornJugador.setEnabled(false);
+        estadoPartida = Estado.FINPARTIDA;
     }
 }

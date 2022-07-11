@@ -11,5 +11,6 @@ enum Estado{
         TURNOHUMANO,
         TURNOCPU0,
         TURNOCPU1,
-        TURNOCPU2
+        TURNOCPU2,
+        FINPARTIDA
     }
